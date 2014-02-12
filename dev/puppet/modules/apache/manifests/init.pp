@@ -1,9 +1,4 @@
 class apache {
-	
-	# Update apt-get package list
-	exec { 'apt-get update':
-		command => '/usr/bin/apt-get update'
-	}  
 
 	# Enable apache2 package
 	package { 'apache2':
