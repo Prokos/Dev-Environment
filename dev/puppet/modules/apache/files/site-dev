@@ -1,0 +1,13 @@
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+    ServerAdmin admin@localhost
+    DirectoryIndex index.php index.html index.htm
+    DocumentRoot /var/www/
+    <Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>

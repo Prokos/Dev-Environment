@@ -1,10 +1,8 @@
-## Readme
-
 ### Introduction
 
-This is my personal vagrant / puppet dev environment repository. 
+This is my personal Vagrant / Puppet dev environment repository. 
 
-Used for future personal projects and the learning of vagrant, puppet and server management in general.
+Used for future personal projects and the learning of Vagrant, Puppet and server management in general.
 
 ### Dependencies
 
