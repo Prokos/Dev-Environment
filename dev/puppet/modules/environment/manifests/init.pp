@@ -19,7 +19,7 @@ class environment {
     	require => Exec['apt-get-update']
 	}
 
-	# Setup ppa repository for PHP 5.4
+	# Setup ppa repository for latest PHP version
 	exec { 'add-php-ppa':
 		command => '/usr/bin/add-apt-repository ppa:ondrej/php5',
 		require => Package['python-software-properties'],

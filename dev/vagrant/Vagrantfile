@@ -1,22 +1,33 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box     = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  config.vm.network :forwarded_port, guest: 80, host: 1337
+	# Use the Ubuntu precise 64 VirtualBox
+	config.vm.box     = "precise64"
+	config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777","fmode=666"]
-  config.vm.synced_folder ".git", "/vagrant/.git", :mount_options => ["dmode=777","fmode=777"], :owner => "root", :group => "root"
+	# Forward ports
+	config.vm.network :forwarded_port, guest: 80, host: 1337
 
-  config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-  end
+	# Sync /vagrant and /vagrant/.git folders
+	config.vm.synced_folder ".",    "/vagrant",      :mount_options => ["dmode=777","fmode=666"]
+	config.vm.synced_folder ".git", "/vagrant/.git", :mount_options => ["dmode=777","fmode=777"], :owner => "root", :group => "root"
+
+	# Setup hostname
+	config.vm.host_name = "kokos.dev"
+
+	config.vm.provider "virtualbox" do |v|
+		# Set host server as DNS resolver
+		v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+		# Proxy guest requests to host DNS server
+		v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+	end
   
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "dev/puppet/manifests"
-    puppet.module_path    = "dev/puppet/modules"
-    puppet.manifest_file  = "init.pp"
-  end
+	# Configure puppet as provisioner	
+	config.vm.provision :puppet do |puppet|
+		puppet.manifests_path = "dev/puppet/manifests"
+		puppet.module_path    = "dev/puppet/modules"
+		puppet.manifest_file  = "init.pp"
+  	end
+
 end

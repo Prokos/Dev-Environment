@@ -2,6 +2,7 @@ NameVirtualHost *:80
 
 <VirtualHost *:80>
     ServerAdmin admin@localhost
+    ServerName  kokos.dev
     DirectoryIndex index.php index.html index.htm
     DocumentRoot /var/www/
     <Directory /var/www/>
