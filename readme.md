@@ -12,8 +12,8 @@ Used for future personal projects and the learning of Vagrant, Puppet and server
 
 ### Setup
 
-1. Download the .zip of this repository, and unzip it into a new folder
-2. Add the following to `/etc/hosts`:
+- Download the .zip of this repository, and unzip it into a new folder
+- Add the following to `/etc/hosts`:
 
 ```
 <VirtualHost *:80>
@@ -24,17 +24,17 @@ Used for future personal projects and the learning of Vagrant, Puppet and server
 </VirtualHost>
 ```
 
-3. Add the following to `/etc/apache2/extra/httpd-vhosts.conf`:
+- Add the following to `/etc/apache2/extra/httpd-vhosts.conf`:
 
 ```
 127.0.0.1 kokos.dev
 ```
 
-3. Restart apachectl
+- Restart apachectl
 
 ```
 sudo apachectl restart
 ```
 
-4. Navigate to the folder from your terminal and run `vagrant up`
-5. After provisioning is done, the server will be accessible on http://kokos.dev
+- Navigate to the folder from your terminal and run `vagrant up`
+- After provisioning is done, the server will be accessible on http://kokos.dev
