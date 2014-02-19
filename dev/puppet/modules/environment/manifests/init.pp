@@ -37,4 +37,10 @@ class environment {
 		require => Exec['apt-get-update']
 	}
 
+	# Install curl
+	package { "curl": 
+	    ensure  => present,
+	    require => Exec['apt-get-update']
+	}
+
 }

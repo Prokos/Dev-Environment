@@ -56,6 +56,13 @@ class php {
 		notify  => Service['apache2']
 	}
 
+	# Install php5-mcrypt
+	package { 'php5-mcrypt':
+		ensure  => present,
+		require => Package['php5'],
+		notify  => Service['apache2']
+	}
+
 	# Install libapache2-mod-php5
 	package { 'libapache2-mod-php5':
 		ensure  => present,

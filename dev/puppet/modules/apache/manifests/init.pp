@@ -5,7 +5,7 @@ class apache {
 		ensure => present
 	}
 
-	# Symlink /vagrant to /var/www/html
+	# Symlink /vagrant to /var/
 	file { '/var/www/':
 		ensure  => link,
 		target  => '/vagrant',
@@ -29,18 +29,26 @@ class apache {
   		require => Package['apache2']
   	}
 
+  	# Clean sites-enabled directory
+  	file { '/etc/apache2/sites-enabled':
+		ensure  => directory,
+		recurse => true,
+		purge   => true,
+		require => Package['apache2']
+  	}
+
   	# Create site-dev file
-  	file { '/etc/apache2/sites-available/site-dev':
+  	file { '/etc/apache2/sites-available/site-dev.conf':
   		ensure  => present,
-  		source  => 'puppet:///modules/apache/site-dev',
+  		source  => 'puppet:///modules/apache/site-dev.conf',
   		require => Package['apache2']
   	}
 
   	# Enable site-dev by symlink
-  	file { '/etc/apache2/sites-enabled/site-dev':
+  	file { '/etc/apache2/sites-enabled/site-dev.conf':
   		ensure  => link,
-  		target  => '/etc/apache2/sites-available/site-dev',
-  		require => File['/etc/apache2/sites-available/site-dev']
+  		target  => '/etc/apache2/sites-available/site-dev.conf',
+  		require => File['/etc/apache2/sites-available/site-dev.conf']
   	}
 
 	# Enable apache2 service
@@ -48,8 +56,9 @@ class apache {
 		ensure    => running,
 		require   => Package['apache2'],
 		subscribe => [
+			File['/etc/hosts'],
 			File['/etc/apache2/mods-enabled/rewrite.load'],
-			File['/etc/apache2/sites-available/site-dev']
+			File['/etc/apache2/sites-available/site-dev.conf']
 		]
 	}
 

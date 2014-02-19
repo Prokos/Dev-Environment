@@ -5,16 +5,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	# Use the Ubuntu precise 64 VirtualBox
 	config.vm.box     = "precise64"
 	config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-
+	
 	# Forward ports
 	config.vm.network :forwarded_port, guest: 80, host: 1337
 
 	# Sync /vagrant and /vagrant/.git folders
 	config.vm.synced_folder ".",    "/vagrant",      :mount_options => ["dmode=777","fmode=666"]
 	config.vm.synced_folder ".git", "/vagrant/.git", :mount_options => ["dmode=777","fmode=777"], :owner => "root", :group => "root"
-
-	# Setup hostname
-	config.vm.host_name = "kokos.dev"
 
 	config.vm.provider "virtualbox" do |v|
 		# Set host server as DNS resolver
