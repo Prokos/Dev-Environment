@@ -16,18 +16,18 @@ Used for future personal projects and the learning of Vagrant, Puppet and server
 - Add the following to `/etc/hosts`:
 
 ```
+127.0.0.1 kokos.dev
+```
+
+- Add the following to `/etc/apache2/extra/httpd-vhosts.conf`:
+
+```
 <VirtualHost *:80>
 	ServerName kokos.dev
 	ProxyPreserveHost On
 	ProxyPass / http://localhost:1337/
 	ProxyPassReverse / http://localhost:1337/
 </VirtualHost>
-```
-
-- Add the following to `/etc/apache2/extra/httpd-vhosts.conf`:
-
-```
-127.0.0.1 kokos.dev
 ```
 
 - Restart apachectl
